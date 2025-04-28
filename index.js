@@ -2,42 +2,52 @@ document.addEventListener('DOMContentLoaded', () => {
     const audio = document.getElementById('song');
     const loader = document.querySelector('.loader');
     const lyrics = document.querySelectorAll('.lyric-line');
-  
+
     // Array con los tiempos en segundos para cada línea de la letra
     const lyricTimes = [
-      0,      // "Quiero"
-      2.5,    // "Parar un momento"
-      6.5,    // "Soñar que estoy dentro"
-      11.5,   // "De tus ojos"
-      15.5,   // "Quiero"
-      18.5,   // "Soñar que te beso"
-      22.5,   // "Después darme cuenta"
-      24.5,   // "Que sigo despierto"
-      26,     // "Y no me la creo"
-      31,     // "Que tú estás aquí"
-      34.5,   // "Simulando que no dices nada"
-      39,     // "Y yo siento así"
-      42.5,   // "Diez mil palabras"
-      47,     // "Yo no te pido que seas normal..."
-      51,     // "Que seas intensa cuando amanezca"
-      53,     // "Que estés tan loca como tú quieras"
-      55,     // "Como tú sientas, como tú estés"
-      57.5,     // "Como tú sepas que solo eres tú"
-      63,     // "Que digas todo sin preguntar..."
-      67,     // "Que tengas miedo cuando te asustes"
-      69,     // "Que sueltes lágrimas si te lucen"
-      71,     // "Que rompas todo si es necesario"
-      73,     // "Los dos estamos para arreglarlo"
-      75,     // "Que a mí me gustas tal como eres"
-      77,     // "A mí me gustas tal como estás"
-      79,     // "Es la verdad"
-      81.5,   // "Así"
-      82.5,   // "Sin maquillar"
-      87,     // "Es la verdad"
-      89.5,   // "Así"
-      90.5,   // "Sin maquillar"
-      95,     // "Feliz San Valentin Mi Niña :3"
-      99
+        0.98,   // [00:00.98]
+        3.30,   // [00:03.30]
+        6.15,   // [00:06.15]
+        10.85,  // [00:10.85]
+        15.75,  // [00:15.75]
+        21.05,  // [00:21.05]
+        23.38,  // [00:23.38]
+        25.82,  // [00:25.82]
+        30.52,  // [00:30.52]
+        32.94,  // [00:32.94]
+        35.38,  // [00:35.38]
+        //39.90,
+        41.73,  // [00:41.73]
+        45.30,  // [00:45.30]
+        49.42,  // [00:49.42]
+        52.73,  // [00:52.73]
+        59.18,  // [00:59.18]
+        63.17,  // [01:03.17]
+        68.35,  // [01:08.35]
+        70.79,  // [01:10.79]
+        75.34,  // [01:15.34]
+        77.78,  // [01:17.78]
+        80.07,  // [01:20.07]
+        83.15,  // [01:23.15]
+        87.63,  // [01:27.63]
+        92.65,  // [01:32.65]
+        97.94,  // [01:37.94]
+        100.10, // [01:40.10]
+        102.56, // [01:42.56]
+        107.47, // [01:47.47]
+        109.81, // [01:49.81]
+        112.38, // [01:52.38]
+        //116.90, // [01:56.90]
+        137.46, // [02:17.46]
+        140.71, // [02:20.71]
+        145.33, // [02:25.33]
+        150.21, // [02:30.21]
+        155.47, // [02:35.47]
+        158.00, // [02:38.00]
+        160.29, // [02:40.29]
+        165.19, // [02:45.19]
+        167.52, // [02:47.52]
+        169.83  // [02:49.83]
     ];
 
     // Verifica que el audio y el loader existan
@@ -48,14 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove("not-loaded");
     };
 
-    audio.addEventListener('loadeddata', hideLoader); // Cuando los datos iniciales están cargados
-    audio.addEventListener('canplay', hideLoader); // Cuando puede reproducirse
-    audio.addEventListener('canplaythrough', hideLoader); // Cuando puede reproducirse sin interrupciones
-    
-    // 2. Timeout de respaldo por si falla la carga
-    const backupTimeout = setTimeout(hideLoader, 5000); // 5 segundos máximo
-    
-    // 3. Manejar errores
+    audio.addEventListener('loadeddata', hideLoader);
+    audio.addEventListener('canplay', hideLoader);
+    audio.addEventListener('canplaythrough', hideLoader);
+
+    const backupTimeout = setTimeout(hideLoader, 5000);
+
     audio.addEventListener('error', () => {
         clearTimeout(backupTimeout);
         hideLoader();
@@ -71,8 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isPlaying = false;
         }
     };
-    
-    // Agregar ambos tipos de eventos para móvil/desktop
+
     document.body.addEventListener('click', handlePlayPause);
     document.body.addEventListener('touchstart', handlePlayPause);
 
@@ -81,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lyrics.forEach((lyric, index) => {
             if (currentTime >= lyricTimes[index] && currentTime < lyricTimes[index + 1]) {
                 lyric.classList.add('active');
-    
                 if (index > 0) {
                     lyrics[index - 1].classList.remove('active');
                     lyrics[index - 1].classList.add('exit');
@@ -93,7 +99,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-  
-  
-  
